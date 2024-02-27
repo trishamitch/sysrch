@@ -32,16 +32,10 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         $stmt_admin->execute();
         $result_admin = $stmt_admin->get_result();
 
-        // Prepare SQL statement to retrieve staff by username from staff table
-        $stmt_staff = $conn->prepare("SELECT * FROM staff WHERE uname = ?");
-        $stmt_staff->bind_param("s", $uname);
-        $stmt_staff->execute();
-        $result_staff = $stmt_staff->get_result();
-
         if ($result_user->num_rows === 1) {
             // Fetch user data
             $row = $result_user->fetch_assoc();
-            // Verify password
+            // Verify password 
             if (password_verify($password, $row['password'])) { // Compare hashed password
                 // Passwords match, set session variables and redirect to user home
                 $_SESSION['uname'] = $row['uname'];
@@ -66,20 +60,6 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
                 // Incorrect password
                 $error = "Incorrect password";
             }
-        } elseif ($result_staff->num_rows === 1) {
-            // Fetch staff data
-            $row = $result_staff->fetch_assoc();
-            // Verify password
-            if (password_verify($password, $row['password'])) { // Compare hashed password
-                // Passwords match, set session variables and redirect to staff home
-                $_SESSION['uname'] = $row['uname'];
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['id'] = $row['id'];
-                header("Location: staff_home.php");
-                exit();
-            } else {
-                $error = "Incorrect username or password";
-            }
         } else {
             // No user, admin, or staff found with the provided username
             $error = "Incorrect username or password";
@@ -96,6 +76,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <h1>CCS SIT-IN MONITORING SYSTEM</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <h2>LOGIN</h2>
         <?php if (!empty($error)) { ?>
