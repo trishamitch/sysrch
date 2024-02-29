@@ -12,6 +12,8 @@ body{
     align-items: center;
     justify-content: center;
     background-image: url(ccs\ background5.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .container{
     position: relative;
@@ -151,6 +153,44 @@ form .buttons button , .backBtn{
     margin-right: 14px;
 }
 
+.container form .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align buttons to the right */
+    margin-top: 10px;
+    
+}
+
+.container form .registerBtn,
+.container form .cancelBtn {
+    padding: 0 20px; /* Adjust padding as needed */
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #4070f4; /* Button background color */
+    transition: background-color 0.3s linear;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 400;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+}
+
+.container form .cancelBtn {
+    margin-right: 10px; /* Adjust spacing between buttons */
+    background-color: #4070f4; /* Button background color */
+}
+
+.container form .registerBtn:hover,
+.container form .cancelBtn:hover {
+    background-color: #265df2; /* Button background color on hover */
+}
 @media (max-width: 750px) {
     .container form{
         overflow-y: scroll;
