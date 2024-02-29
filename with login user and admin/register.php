@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="account">
-                    <span class="title">Identity Details</span>
+                    <span class="title">Account</span>
 
                     <div class="fields">
                         <div class="input-field">
@@ -124,7 +124,11 @@
                         </div>
                     </div>
 
-                    <button type="submit">Register</button>
+                    <div class="buttons">
+                        <a href="index.php" class="cancelBtn">Cancel</a>
+                        <button type="submit">Register</button>
+                        
+                    </div>
                 </div> 
             </div>
         </form>
