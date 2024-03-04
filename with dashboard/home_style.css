@@ -1,0 +1,187 @@
+body {
+  margin: 0;
+  background-image: url("ccs background5.jpg");
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 800;
+  background-size: cover;
+  color: #333; /* Default text color */
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+header {
+  background: rgba(30, 20, 39, 0.85);
+  overflow: auto;
+  padding: 20px 0;
+}
+
+.logo {
+  float: left;
+  padding: 0;
+  margin-right: 10px;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+nav {
+  float: right;
+}
+
+nav ul {
+  margin: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 30px;
+  position: relative;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  position: relative; /* Added position relative */
+}
+
+nav a:hover {
+  color: #d4e722;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #d820f0;
+  position: absolute;
+  top: -8px; /* Adjusted the top position */
+  width: 0%;
+  transition: all ease-in-out 250ms;
+}
+
+
+nav li:hover a::before { /* Corrected the selector to apply hover effect on li */
+  width: 100%;
+}
+
+h1 {
+  color: #fff;
+  margin: 0;
+  margin-right: 0px;
+  text-align: center;
+  font-family: cursive;
+}
+
+.content-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.date {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin: 0;
+  font-size: 16px;
+  color: #000;
+}
+
+.date::before {
+  content: '\2022';
+  margin-right: 5px;
+}
+
+h2 {
+  color: blue;
+  margin-top: 0;
+}
+
+
+/* Add this CSS code below your existing CSS */
+
+/* Add this CSS code below your existing CSS */
+
+/* Add this CSS code below your existing CSS */
+
+#profileForm {
+  margin: 20px auto;
+  max-width: 600px; /* Reduced max-width */
+  background-color: rgba(255, 255, 255, 0.753);
+  padding: 30px; /* Reduced padding */
+  border-radius: 8px; /* Reduced border radius */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Reduced box shadow */
+}
+
+#profileForm label {
+  display: block;
+  margin-bottom: 10px; /* Reduced margin-bottom */
+}
+
+#profileForm input[type="text"] {
+  width: calc(100% - 20px); /* Adjusted width */
+  margin-bottom: 15px; /* Reduced margin-bottom */
+  padding: 10px; /* Reduced padding */
+  border: 1px solid #ccc;
+  border-radius: 4px; /* Reduced border radius */
+}
+
+#profileForm button {
+  padding: 12px 24px; /* Reduced padding */
+  font-size: 14px; /* Reduced font-size */
+  border-radius: 10px;
+}
+
+.name-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-group {
+  flex: 0 0 48%;
+}
+
+.input-group input[type="text"] {
+  width: 100%;
+}
+
+.button-group {
+  margin-top: 20px; /* Reduced margin-top */
+  text-align: right;
+}
+#sidebar{
+  padding: 20px;
+  width: 300px;
+  height: 657px;
+  background-color: #0000009c;
+  color: rgb(0, 0, 0);
+  float: right;
+  text-align: center;
+}
+#data{
+  height: 700px;
+  background: #000000c7;
+  padding-top: 20px;
+}
+.session {
+  width: 70px;
+  height: 50px;
+  background-color: #ffffff;
+  text-align: center;
+  line-height: 50px; 
+  margin: 0 auto; 
+  border-radius: 10px;
+}
