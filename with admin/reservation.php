@@ -42,9 +42,60 @@ if (isset($_SESSION['id']) && isset($_SESSION['uname'])) {
     </div>
     <div class="frame">
         <div class="reserve">
-            <h1>Choose a Room and Time</h1>
+            <h1>Choose Room and Time</h1>
+                <ul>
+                <li><a href="#" class="item">Room <i class="fa fa-chevron-down"></i></a>
+                    <span class="accent"></span>
+                    <ul class="drop-down">
+                    <li><a href="#">Room 524</a></li>
+                    <li><a href="#">Room 526</a></li>
+                    <li><a href="#">Room 528</a></li>
+                    <li><a href="#">Room 530</a></li>
+                    <li><a href="#">Room 542</a></li>
+                    <li><a href="#">Room 544</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="item">Time <i class="fa fa-chevron-down"></i></a>
+                    <span class="accent"></span>
+                    <ul class="drop-down">
+                    <li><a href="#">8:00-9:00 AM</a></li>
+                    <li><a href="#">10:00-11:00 AM</a></li>
+                    <li><a href="#">11:00-12:00 PM</a></li>
+                    <li><a href="#">1:00-2:00 PM</a></li>
+                    <li><a href="#">2:00-3:00 PM</a></li>
+                    <li><a href="#">3:00-4:00 PM</a></li>
+                    </ul>
+                </li>
+                </ul>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var dropdowns = document.querySelectorAll('.drop-down');
+            dropdowns.forEach(function(dropdown) {
+                dropdown.parentNode.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    var siblingDropdowns = this.parentNode.querySelectorAll('.drop-down');
+                    siblingDropdowns.forEach(function(sibling) {
+                        if (sibling !== dropdown) {
+                            sibling.style.display = 'none';
+                        }
+                    });
+                    if (dropdown.style.display === 'block') {
+                        dropdown.style.display = 'none';
+                    } else {
+                        dropdown.style.display = 'block';
+                    }
+                });
+                document.addEventListener('click', function() {
+                    dropdown.style.display = 'none';
+                });
+                dropdown.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 <?php
