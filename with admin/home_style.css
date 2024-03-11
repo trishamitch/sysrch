@@ -280,7 +280,91 @@ p {
   font-family: 'Lato', sans-serif;
   color: #a759f5;
 }
-.reserve {
+.reserve h1 {
+  margin: 50px 0;
+  font-size: 50px;
+  font-weight: 100;
   text-align: center;
+  font-family: "Open Sans";
+}
+
+.reserve ul {
+  width: 620px;
+  margin: 0 auto;
+}
+
+.reserve ul li {
+  float: left;
+  list-style: none;
+  margin-right: 10px;
+  position: relative;
+}
+
+.reserve ul li a {
+  font: 700 15px Open Sans;
+  text-transform: uppercase;
+  position: relative;
+  color: #333333;
+  text-decoration: none;
+  border: 3px solid #000000;
+  letter-spacing: 1px;
+  padding: 10px 15px 10px 25px;
+  display: block;
+  width: 150px;
+  z-index: 5000;
+}
+
+.reserve ul li a i {
+  font-size: 12px !important;
+  position: absolute;
+  right: 10px;
+  top: 14px;
+}
+
+.reserve ul li .drop-down {
+  position: absolute;
+  padding: 0;
+  display: none;
+  margin: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.reserve ul li .drop-down li {
+  position: relative;
+  float: none;
+}
+
+.reserve ul li .drop-down li a {
+  border-top: none;
+  width: 150px;
+}
+
+.reserve ul li .drop-down li a:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.reserve ul li .drop-down li:nth-of-type(1) a {
+  border-top: none;
+}
+
+.reserve .accent {
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #000;
+  position: absolute;
+  transition: 0.3s ease;
+}
+
+.reserve .animate {
+  width: 100%;
+  transition: 0.3s ease;
+}
+
+.reserve .item:hover {
+  color: #ffffff;
 }
 
