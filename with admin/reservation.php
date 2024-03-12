@@ -66,6 +66,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['uname'])) {
                     <li><a href="#">3:00-4:00 PM</a></li>
                     </ul>
                 </li>
+                <li><a href="#" class="item">Reserve</a>
                 </ul>
         </div>
     </div>
