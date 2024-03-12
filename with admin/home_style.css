@@ -280,6 +280,9 @@ p {
   font-family: 'Lato', sans-serif;
   color: #a759f5;
 }
+.reserve{
+  margin-top: -150px;
+}
 .reserve h1 {
   margin: 50px 0;
   font-size: 50px;
@@ -290,7 +293,7 @@ p {
 
 .reserve ul {
   width: 620px;
-  margin: 0 auto;
+  margin-left: 50px;
 }
 
 .reserve ul li {
