@@ -114,3 +114,35 @@ h1,h3 {
 	font-size: 20px;
 	font-family: 'Courier New', Courier, monospace;
 }
+p{
+  position: fixed;
+  top: 0%;
+  right:50px; /* Adjust this value according to your sidebar width */
+  font-size: 16px;
+  color: #fff;
+  background-color: #a759f5;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 999;
+}
+a{
+  top: 0%;
+  align-items: start;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+}
+
+.title{
+	text-align: center;
+	color: #a759f5;
+	font-size: 40px;
+  	font-family: 'Lato', sans-serif;
+	font-weight: bold;
+}
+.title a{
+	text-align: center;
+	color: #a759f5;
+	font-size: 40px;
+  	font-family: 'Lato', sans-serif;
+}
