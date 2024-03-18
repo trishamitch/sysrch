@@ -20,46 +20,49 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
     } elseif (empty($password)) {
         $error = "Password is required";
     } else {
-        // Prepare SQL statement to retrieve user by username from users table
-        $stmt_user = $conn->prepare("SELECT * FROM users WHERE uname = ?");
-        $stmt_user->bind_param("s", $uname);
-        $stmt_user->execute();
-        $result_user = $stmt_user->get_result();
+        $stmt_admin = $conn->prepare("SELECT * FROM admin WHERE uname = ?");
+        $stmt_admin->bind_param("s", $uname);
+        $stmt_admin->execute();
+        $result_admin = $stmt_admin->get_result();
 
-        if ($result_user->num_rows === 1) {
-            // Fetch user data
-            $row = $result_user->fetch_assoc();
+        if ($result_admin->num_rows === 1) {
+            // Fetch admin data
+            $row = $result_admin->fetch_assoc();
             // Verify password
-            if (password_verify($password, $row['password'])) { // Compare hashed password
-                // Passwords match, set session variables and redirect to user home
+            if ($password === $row['password']) { // Compare plain text passwords for admin
+                // Passwords match, set session variables and redirect to admin home
                 $_SESSION['uname'] = $row['uname'];
-                $_SESSION['fname'] = $row['fname'];
                 $_SESSION['id'] = $row['id'];
-                header("Location: home.php");
+                header("Location: admin_home.php");
                 exit();
             } else {
-                $error = "Incorrect username or password";
+                // Incorrect password
+                $error = "Incorrect password";
             }
         } else {
             // No user, admin, or staff found with the provided username
             $error = "Incorrect username or password";
-        }
+        } 
     }
 } 
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>LOGIN</title>
+    <title>ADMIN LOGIN</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
 </head>
 <body>
-    <p><a href="admin_login.php" class="button">Staff/Admin?</a></p>   
-    <h1>CCS SIT-IN MONITORING SYSTEM</h1>
+    <div class="title">
+        <a href="index.php"><i class="fas fa-arrow-left"></i><a>
+        CCS SIT-IN MONITORING SYSTEM
+    </div>   
+     
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <h2>USER LOGIN</h2>
+        <h2>ADMIN LOGIN</h2>
         <?php if (!empty($error)) { ?>
             <p class="error"><?php echo $error; ?></p>
         <?php } ?>
@@ -75,7 +78,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         <button type="submit">Login</button>
         <br><br><br>
         <div class="links" style="color: #a759f5">
-            Don't have an account? <a href="register.php" style="color:#a759f5">Sign Up</a>
+            Don't have an account? <a href="registration_admin.php" style="color:#a759f5">Sign Up</a>
         </div>
     </form>
 </body>
