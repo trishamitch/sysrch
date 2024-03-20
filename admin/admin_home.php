@@ -36,19 +36,19 @@ if(isset($_POST["query"])) {
     </label>
     <div class="sidebar">
         <header>Menu</header>
-        <a href="home.php" class="active">
+        <a href="admin_home.php" class="active">
             <i class="fas fa-qrcode"></i>
             <span>Dashboard</span>
         </a>
-        <a href="edit_profile.php">
+        <a href="#">
             <i class="fas fa-users"></i>
             <span>Sitin Records</span>
         </a>
-        <a href="session.php">
+        <a href="#">
             <i class="fas fa-list"></i> 
             <span>Generate Report</span>
         </a>
-        <a href="reservation.php">
+        <a href="#">
             <i class="fas fa-redo"></i> 
             <span>Reset Session</span>
         </a>
@@ -70,23 +70,6 @@ if(isset($_POST["query"])) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        function deleteUser(userId) {
-            if(confirm("Are you sure you want to delete this user?")) {
-                $.ajax({
-                    url: "delete_user.php",
-                    method: "POST",
-                    data: {id: userId},
-                    success: function(response) {
-                        alert("User deleted successfully.");
-                        searchUser(); // Reload the search results after deletion
-                    },
-                    error: function(xhr, status, error) {
-                        console.log("Error occurred while deleting user.");
-                        console.log(error);
-                    }
-                });
-            }
-        }
 
         $(document).ready(function(){
             $('#searchInput').on('keyup', function(event) {
