@@ -1,15 +1,48 @@
-<?php 
+<?php
 session_start();
+include "db_conn.php";
 
-if (isset($_SESSION['id']) && isset($_SESSION['uname'])) {
+// Check if user is logged in
+if (!isset($_SESSION['id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_reservation'])) {
+    // Validate and sanitize input data
+    $user_id = $_SESSION['id'];
+    $room = $_POST['room'];
+    $date = $_POST['date'];
+    $time = $_POST['time'];
+    $purpose = $_POST['purpose'];
+
+    // Insert reservation data into the database
+    $stmt = $conn->prepare("INSERT INTO reservations (user_id, room, date, time, purpose) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("issss", $user_id, $room, $date, $time, $purpose);
+
+    if ($stmt->execute()) {
+        // Reservation successful, redirect to the same page to prevent form resubmission
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    } else {
+        // Reservation failed
+        echo "<script>alert('Error: " . $conn->error . "');</script>";
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HOME</title>
+    <title>Reservation</title>
     <link rel="stylesheet" type="text/css" href="home_style.css">
-    <!-- Add a link to the FontAwesome CDN for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <input type="checkbox" id="check">
@@ -23,7 +56,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['uname'])) {
             <i class="fas fa-qrcode"></i>
             <span>Dashboard</span>
         </a>
-        <a href="edit_profile.php">
+        <a href="edit_profile.php" class="active">
             <i class="fas fa-user-edit"></i>
             <span>Edit Profile</span>
         </a>
@@ -31,7 +64,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['uname'])) {
             <i class="fas fa-clock"></i>
             <span>Your Session</span>
         </a>
-        <a href="reservation.php" class="active">
+        <a href="reservation.php">
             <i class="fas fa-calendar-alt"></i>
             <span>Reservation</span>
         </a>
@@ -41,67 +74,32 @@ if (isset($_SESSION['id']) && isset($_SESSION['uname'])) {
         </a>
     </div>
     <div class="frame">
-        <div class="reserve">
-            <h1>Choose Room and Time</h1>
-                <ul>
-                <li><a href="#" class="item">Room <i class="fa fa-chevron-down"></i></a>
-                    <span class="accent"></span>
-                    <ul class="drop-down">
-                    <li><a href="#">Room 524</a></li>
-                    <li><a href="#">Room 526</a></li>
-                    <li><a href="#">Room 528</a></li>
-                    <li><a href="#">Room 530</a></li>
-                    <li><a href="#">Room 542</a></li>
-                    <li><a href="#">Room 544</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="item">Time <i class="fa fa-chevron-down"></i></a>
-                    <span class="accent"></span>
-                    <ul class="drop-down">
-                    <li><a href="#">8:00-9:00 AM</a></li>
-                    <li><a href="#">10:00-11:00 AM</a></li>
-                    <li><a href="#">11:00-12:00 PM</a></li>
-                    <li><a href="#">1:00-2:00 PM</a></li>
-                    <li><a href="#">2:00-3:00 PM</a></li>
-                    <li><a href="#">3:00-4:00 PM</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="item">Reserve</a>
-                </ul>
+        <div class="main-content">
+            <h2>Make a Reservation</h2>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <label for="room">Select Room:</label>
+                <select name="room" id="room">
+                    <option value="Room 525">Room 524</option>
+                    <option value="Room 526">Room 526</option>
+                    <option value="Room 528">Room 528</option>
+                    <option value="Room 529">Room 529</option>
+                    <option value="Room 542">Room 542</option>
+                    <option value="Room 544">Room 544</option>
+                </select><br>
+
+                <label for="date">Select Date:</label>
+                <input type="date" name="date" id="date" required><br>
+
+                <label for="time">Select Time:</label>
+                <input type="time" name="time" id="time" required><br>
+
+                <label for="purpose">Purpose:</label><br>
+                <textarea name="purpose" id="purpose" rows="4" cols="50" required></textarea><br>
+
+                <button type="submit" name="submit_reservation">Submit Reservation</button>
+            </form>
         </div>
+
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var dropdowns = document.querySelectorAll('.drop-down');
-            dropdowns.forEach(function(dropdown) {
-                dropdown.parentNode.addEventListener('click', function(event) {
-                    event.stopPropagation();
-                    var siblingDropdowns = this.parentNode.querySelectorAll('.drop-down');
-                    siblingDropdowns.forEach(function(sibling) {
-                        if (sibling !== dropdown) {
-                            sibling.style.display = 'none';
-                        }
-                    });
-                    if (dropdown.style.display === 'block') {
-                        dropdown.style.display = 'none';
-                    } else {
-                        dropdown.style.display = 'block';
-                    }
-                });
-                document.addEventListener('click', function() {
-                    dropdown.style.display = 'none';
-                });
-                dropdown.addEventListener('click', function(event) {
-                    event.stopPropagation();
-                });
-            });
-        });
-    </script>
 </body>
 </html>
-<?php
-} else {
-     header("Location: index.php");
-     exit();
-}
-?>
