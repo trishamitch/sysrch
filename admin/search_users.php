@@ -5,9 +5,9 @@ if(isset($_POST["query"])) {
     $search = $_POST["query"];
     
     // Assuming idno, firstname, middlename, and lastname are the fields you want to search for
-    $sql = "SELECT u.idno, u.fname, u.mname, u.lname, r.purpose, r.laboratory, r.reserved_datetime, r.remaining_session 
+    $sql = "SELECT u.idno, u.fname, u.mname, u.lname, r.purpose, r.room, r.date, r.time 
             FROM users u 
-            LEFT JOIN reservation r ON u.id = r.user_id 
+            LEFT JOIN reservations r ON u.id = r.user_id 
             WHERE u.idno = '$search'";
     $result = $conn->query($sql);
 
@@ -19,7 +19,7 @@ if(isset($_POST["query"])) {
         while($row = $result->fetch_assoc()) {
             echo "<div class='search-result'>";
             echo "<div class='button-container'>";
-            echo "<button class='delete-button' onclick='deleteUser()'><i class='fas fa-trash-alt'></i></button>";
+            echo "<button class='decline-button' onclick='declineUser()'>Decline</button>";
             echo "<button class='sitin-button' onclick='viewUser()'>Accept</button>";
             echo "</div>"; // close button-container
             echo "<div class='user-info'>";
@@ -34,13 +34,19 @@ if(isset($_POST["query"])) {
             echo "<br>";
             echo "<div class='input-group'>";
             echo "<label>Laboratory</label>";
-            echo "<input type='text' value='" . $row["laboratory"] . "' readonly>";
+            echo "<input type='text' value='" . $row["room"] . "' readonly>";
             echo "</div>";
             echo "<div class='input-group'>";
-            echo "<label>Date&Time</label>";
-            echo "<input type='text' value='" . $row["reserved_datetime"] . "' readonly>";
-            echo "<label>Remaining Session</label>";
-            echo "<input type='text' value='" . $row["remaining_session"] . "' readonly>";
+            echo "<label>Purpose</label>";
+            echo "<input type='text' value='" . $row["purpose"] . "' readonly>";
+            echo "</div>";
+            echo "<div class='input-group'>";
+            echo "<label>Date</label>";
+            echo "<input type='text' value='" . $row["date"] . "' readonly>";
+            echo "</div>";
+            echo "<div class='input-group'>";
+            echo "<label>Time</label>";
+            echo "<input type='text' value='" . $row["time"] . "' readonly>";
             echo "</div>";
             echo "</div>"; // close user-info
             echo "</div>"; // close search-result
